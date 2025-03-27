@@ -1,14 +1,96 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>블라스트 퍼즐</title>
+    <title>Star Blast: 최애를 위한 무대</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <div class="game-container">
-        <div class="score">점수: <span id="score">0</span></div>
-        <div class="grid" id="gameBoard"></div>
+    <div id="gameContainer">
+        <!-- 로비 화면 -->
+        <div id="lobby" class="screen">
+            <h1>⭐ Star Blast ⭐</h1>
+            <p class="subtitle">최애를 위한 무대</p>
+            <div class="lobby-buttons">
+                <button onclick="window.onload()">
+                    <i class="fas fa-play"></i> 처음부터 시작
+                </button>
+                <button onclick="game.showStageSelect()">
+                    <i class="fas fa-list"></i> 스테이지 선택
+                </button>
+            </div>
+        </div>
+
+        <!-- 게임 화면 -->
+        <div id="game" class="screen hidden">
+            <div id="stage-info">
+                <h2 id="stageName">연습생 데뷔</h2>
+                <div class="stage-details">
+                    <div class="detail-item">
+                        <i class="fas fa-star"></i>
+                        <span>목표 점수: <span id="targetScore">30,000</span></span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-clock"></i>
+                        <span>남은 시간: <span id="timeLeft">90</span>초</span>
+                    </div>
+                    <div class="detail-item">
+                        <i class="fas fa-tasks"></i>
+                        <span>특수 조건: <span id="specialCondition">없음 (튜토리얼)</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="game-main">
+                <div class="player-info" id="player1">
+                    <div class="player-name">
+                        <i class="fas fa-user"></i> 프로듀서
+                    </div>
+                    <div class="player-score">0</div>
+                </div>
+                
+                <div id="gameBoard"></div>
+                
+                <div class="player-info" id="player2">
+                    <div class="player-name">
+                        <i class="fas fa-star"></i> 팬매니저 AI
+                    </div>
+                    <div class="player-score">0</div>
+                </div>
+            </div>
+
+            <div class="game-footer">
+                <div class="gauge fan-gauge">
+                    <div class="gauge-label">팬 게이지</div>
+                    <div class="gauge-bar">
+                        <div id="bossHpFill" class="gauge-fill"></div>
+                    </div>
+                </div>
+                <div class="gauge skill-gauge">
+                    <div class="gauge-label">스킬 게이지</div>
+                    <div class="gauge-bar">
+                        <div id="skillGaugeFill" class="gauge-fill"></div>
+                    </div>
+                </div>
+                <button id="useSkill" disabled>
+                    <i class="fas fa-magic"></i> 스페셜 무대 연출
+                </button>
+            </div>
+        </div>
     </div>
+    
+    <!-- Game Scripts -->
     <script src="game.js"></script>
+    <script src="ai-coop-game.js"></script>
+
+    <!-- 파티클 효과를 위한 캔버스 -->
+    <canvas id="particleCanvas"></canvas>
+
+    <!-- 배경 음악 컨트롤 -->
+    <div id="bgmControl">
+        <button id="toggleBGM">
+            <i class="fas fa-volume-up"></i>
+        </button>
+    </div>
 </body>
 </html>

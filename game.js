@@ -5,7 +5,6 @@ class BlastGame {
         this.score = 0;
         this.boardSize = 8;
         this.selectedBlocks = [];
-        this.init();
     }
 
     init() {
@@ -20,7 +19,7 @@ class BlastGame {
             this.board[row] = [];
             for (let col = 0; col < this.boardSize; col++) {
                 this.board[row][col] = {
-                    color: this.colors[Math.floor(Math.random() * this.colors.length)],
+                    color: 'gray', // 기본 색상
                     row: row,
                     col: col
                 };
